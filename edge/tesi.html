@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabella urti tesi</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h2 align="center">Tabella degli urti</h2>
+    
+    
+    <script>
+console.log("Mao");
+var d = new Date(1469433907836);
+console.log(d.toLocaleString());
+var idprova;
+var faccia1=0;
+var faccia2=0;
+var faccia3=0;
+var faccia4=0;
+var faccia5=0;
+var faccia6=0;
+var link1="";
+var link2="";
+var link3="";
+var link4="";
+var link5="";
+var link6="";
+    // Wait until the page is loaded and then call doPoll()
+    $(document).ready(
+      //function doPoll1() {
+        // Use the AJAX helper to get the JSON payload from the temperature sensor
+        $.get('http://test.atmosphere.tools/v1/measurements?filter={"thing":"product"}&limit=1&page=1',
+          // When the response arrives, this function is called
+          function (s) {
+            
+            
+            console.log(s);
+            // preserve newlines, etc - use valid JSON
+s = s.replace(/\\n/g, "\\n")  
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f")
+               .replace("docs",'"docs"')
+               .replace("relatedThings", '"relatedThings"')
+               .replace("baseFeatures", '"baseFeatures"')
+               .replace("tags", '"tags"')
+               .replace("deleted", '"deleted"')
+               .replace("false", '"false"')
+               .replace("_id", '"_id"')               
+               .replace("thing", '"thing"')
+               .replace("feature", '"feature"')
+               .replace("device", '"device"')
+               .replace("values:[{value", '"values":[{"value"')
+               .replace("magnitude", '"magnitude"')
+               .replace("startDate", '"startDate"')
+               .replace("endDate", '"endDate"')
+               .replace("total", '"total"')
+               .replace("limit", '"limit"')
+               .replace("page", '"page"')
+               .replace("pages", '"pages"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"');
+// remove non-printable and other non-valid JSON chars
+s = s.replace(/[\u0000-\u0019]+/g,""); 
+//s="'"+s+"'";
+console.log(s);
+var o = JSON.parse(s);
+            console.log("Mao");
+            console.log(s);
+           // var obj =JSON.parse(data);
+            console.log(o);
+            // Select the "temp" HTML element and update its content using the data.value
+            // (the value) and data.unit (the unit) returned in the JSON payload
+            idprova1=o.docs[0].values[0].value[0];
+            $('#temp12').html(o.docs[0].values[0].value[1]);
+            $('#temp13').html(o.docs[0].values[0].value[2]);
+            $('#temp14').html(o.docs[0].values[0].value[3]);
+            $('#temp15').html(o.docs[0].values[0].value[4]);
+            var xy=o.docs[0].values[0].value[2];
+            var yz=o.docs[0].values[0].value[3];
+            var xz=o.docs[0].values[0].value[4];
+            var magnitude=o.docs[0].values[0].value[1];
+            
+           idprova1=idprova1*1000;
+            var d1 = new Date(idprova1);
+            idprova1=d1.toLocaleString();
+            console.log(idprova1);
+            document.getElementById("data1").innerHTML = idprova1;
+
+            // The doPoll() function sets a timer to call itself again in 1 secods (1000 milliseconds)
+            //setTimeout(doPoll1, 20000);
+            if(yz>180&&xz>180){if(magnitude<4){faccia1++;}
+    else if(magnitude>3&&magnitude<7){faccia1=faccia1+2;}
+    else {faccia1=faccia1+3;}};
+    if(xy>180&&yz>90&&yz<180){if(magnitude<4){faccia2++;}
+    else if(magnitude>3&&magnitude<7){faccia2=faccia2+2;}
+    else {faccia2=faccia2+3;}};
+    if(xy<60&&xz<45){if(magnitude<4){faccia3++;}
+    else if(magnitude>3&&magnitude<7){faccia3=faccia3+2;}
+    else {faccia3=faccia3+3;}};
+    if(yz>30&&yz<90&&xz>45&&xz<90){if(magnitude<4){faccia4++;}
+    else if(magnitude>3&&magnitude<7){faccia4=faccia4+2;}
+    else {faccia4=faccia4+3;}};
+    if(xy>60&&xy<90&&yz<30){if(magnitude<4){faccia5++;}
+    else if(magnitude>3&&magnitude<7){faccia5=faccia5+2;}
+    else {faccia5=faccia5+3;}};
+    if(xy>90&&xy<180&&xz>90&&xz<180){if(magnitude<4){faccia6++;}
+    else if(magnitude>3&&magnitude<7){faccia6=faccia6+2;}
+    else {faccia6=faccia6+3;}};
+        }))
+    
+    
+    
+    //function doPoll2() {
+        // Use the AJAX helper to get the JSON payload from the temperature sensor
+        $.get('http://test.atmosphere.tools/v1/measurements?filter={"thing":"product"}&limit=1&page=2',
+          // When the response arrives, this function is called
+          function (s) {
+            
+            
+            console.log(s);
+            // preserve newlines, etc - use valid JSON
+s = s.replace(/\\n/g, "\\n")  
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f")
+               .replace("docs",'"docs"')
+               .replace("relatedThings", '"relatedThings"')
+               .replace("baseFeatures", '"baseFeatures"')
+               .replace("tags", '"tags"')
+               .replace("deleted", '"deleted"')
+               .replace("false", '"false"')
+               .replace("_id", '"_id"')               
+               .replace("thing", '"thing"')
+               .replace("feature", '"feature"')
+               .replace("device", '"device"')
+               .replace("values:[{value", '"values":[{"value"')
+               .replace("magnitude", '"magnitude"')
+               .replace("startDate", '"startDate"')
+               .replace("endDate", '"endDate"')
+               .replace("total", '"total"')
+               .replace("limit", '"limit"')
+               .replace("page", '"page"')
+               .replace("pages", '"pages"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"');
+// remove non-printable and other non-valid JSON chars
+s = s.replace(/[\u0000-\u0019]+/g,""); 
+//s="'"+s+"'";
+console.log(s);
+var o = JSON.parse(s);
+            console.log("Mao");
+            console.log(s);
+           // var obj =JSON.parse(data);
+            console.log(o);
+            // Select the "temp" HTML element and update its content using the data.value
+            // (the value) and data.unit (the unit) returned in the JSON payload
+            idprova2=o.docs[0].values[0].value[0];
+            $('#temp22').html(o.docs[0].values[0].value[1]);
+            $('#temp23').html(o.docs[0].values[0].value[2]);
+            $('#temp24').html(o.docs[0].values[0].value[3]);
+            $('#temp25').html(o.docs[0].values[0].value[4]);
+            var xy=o.docs[0].values[0].value[2];
+            var yz=o.docs[0].values[0].value[3];
+            var xz=o.docs[0].values[0].value[4];
+            var magnitude=o.docs[0].values[0].value[1];
+
+            idprova2=idprova2*1000;
+            var d2 = new Date(idprova2);
+            idprova2=d2.toLocaleString();
+            console.log(idprova2);
+            document.getElementById("data2").innerHTML = idprova2;
+            // The doPoll() function sets a timer to call itself again in 1 secods (1000 milliseconds)
+            //setTimeout(doPoll2, 20000);
+            if(yz>180&&xz>180){if(magnitude<4){faccia1++;}
+    else if(magnitude>3&&magnitude<7){faccia1=faccia1+2;}
+    else {faccia1=faccia1+3;}};
+    if(xy>180&&yz>90&&yz<270){if(magnitude<4){faccia2++;}
+    else if(magnitude>3&&magnitude<7){faccia2=faccia2+2;}
+    else {faccia2=faccia2+3;}};
+    if(xy<60&&xz<45){if(magnitude<4){faccia3++;}
+    else if(magnitude>3&&magnitude<7){faccia3=faccia3+2;}
+    else {faccia3=faccia3+3;}};
+    if(yz>30&&yz<90&&xz>45&&xz<90){if(magnitude<4){faccia4++;}
+    else if(magnitude>3&&magnitude<7){faccia4=faccia4+2;}
+    else {faccia4=faccia4+3;}};
+    if(xy>60&&xy<90&&yz<30){if(magnitude<4){faccia5++;}
+    else if(magnitude>3&&magnitude<7){faccia5=faccia5+2;}
+    else {faccia5=faccia5+3;}};
+    if(xy>90&&xy<270&&xz>90&&xz<270){if(magnitude<4){faccia6++;}
+    else if(magnitude>3&&magnitude<7){faccia6=faccia6+2;}
+    else {faccia6=faccia6+3;}};
+        })
+        
+    
+    
+    //function doPoll3() {
+        // Use the AJAX helper to get the JSON payload from the temperature sensor
+        $.get('http://test.atmosphere.tools/v1/measurements?filter={"thing":"product"}&limit=1&page=3',
+          // When the response arrives, this function is called
+          function (s) {
+            
+            
+            console.log(s);
+            // preserve newlines, etc - use valid JSON
+s = s.replace(/\\n/g, "\\n")  
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f")
+               .replace("docs",'"docs"')
+               .replace("relatedThings", '"relatedThings"')
+               .replace("baseFeatures", '"baseFeatures"')
+               .replace("tags", '"tags"')
+               .replace("deleted", '"deleted"')
+               .replace("false", '"false"')
+               .replace("_id", '"_id"')               
+               .replace("thing", '"thing"')
+               .replace("feature", '"feature"')
+               .replace("device", '"device"')
+               .replace("values:[{value", '"values":[{"value"')
+               .replace("magnitude", '"magnitude"')
+               .replace("startDate", '"startDate"')
+               .replace("endDate", '"endDate"')
+               .replace("total", '"total"')
+               .replace("limit", '"limit"')
+               .replace("page", '"page"')
+               .replace("pages", '"pages"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"');
+// remove non-printable and other non-valid JSON chars
+s = s.replace(/[\u0000-\u0019]+/g,""); 
+//s="'"+s+"'";
+console.log(s);
+var o = JSON.parse(s);
+            console.log("Mao");
+            console.log(s);
+           // var obj =JSON.parse(data);
+            console.log(o);
+            // Select the "temp" HTML element and update its content using the data.value
+            // (the value) and data.unit (the unit) returned in the JSON payload
+            idprova3=o.docs[0].values[0].value[0];
+            $('#temp32').html(o.docs[0].values[0].value[1]);
+            $('#temp33').html(o.docs[0].values[0].value[2]);
+            $('#temp34').html(o.docs[0].values[0].value[3]);
+            $('#temp35').html(o.docs[0].values[0].value[4]);
+            var xy=o.docs[0].values[0].value[2];
+            var yz=o.docs[0].values[0].value[3];
+            var xz=o.docs[0].values[0].value[4];
+            var magnitude=o.docs[0].values[0].value[1];
+
+            idprova3=idprova3*1000;
+            var d3 = new Date(idprova3);
+            idprova3=d3.toLocaleString();
+            console.log(idprova3);
+            document.getElementById("data3").innerHTML = idprova3;
+            // The doPoll() function sets a timer to call itself again in 1 secods (1000 milliseconds)
+            //setTimeout(doPoll3, 20000);
+            if(yz>180&&xz>180){if(magnitude<4){faccia1++;}
+    else if(magnitude>3&&magnitude<7){faccia1=faccia1+2;}
+    else {faccia1=faccia1+3;}};
+    if(xy>180&&yz>90&&yz<270){if(magnitude<4){faccia2++;}
+    else if(magnitude>3&&magnitude<7){faccia2=faccia2+2;}
+    else {faccia2=faccia2+3;}};
+    if(xy<60&&xz<45){if(magnitude<4){faccia3++;}
+    else if(magnitude>3&&magnitude<7){faccia3=faccia3+2;}
+    else {faccia3=faccia3+3;}};
+    if(yz>30&&yz<90&&xz>45&&xz<90){if(magnitude<4){faccia4++;}
+    else if(magnitude>3&&magnitude<7){faccia4=faccia4+2;}
+    else {faccia4=faccia4+3;}};
+    if(xy>60&&xy<90&&yz<30){if(magnitude<4){faccia5++;}
+    else if(magnitude>3&&magnitude<7){faccia5=faccia5+2;}
+    else {faccia5=faccia5+3;}};
+    if(xy>90&&xy<270&&xz>90&&xz<270){if(magnitude<4){faccia6++;}
+    else if(magnitude>3&&magnitude<7){faccia6=faccia6+2;}
+    else {faccia6=faccia6+3;}};
+        });
+        
+    
+    
+    
+    //function doPoll4() {
+        // Use the AJAX helper to get the JSON payload from the temperature sensor
+        $.get('http://test.atmosphere.tools/v1/measurements?filter={"thing":"product"}&limit=1&page=4',
+          // When the response arrives, this function is called
+          function (s) {
+            
+            
+            console.log(s);
+            // preserve newlines, etc - use valid JSON
+s = s.replace(/\\n/g, "\\n")  
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f")
+               .replace("docs",'"docs"')
+               .replace("relatedThings", '"relatedThings"')
+               .replace("baseFeatures", '"baseFeatures"')
+               .replace("tags", '"tags"')
+               .replace("deleted", '"deleted"')
+               .replace("false", '"false"')
+               .replace("_id", '"_id"')               
+               .replace("thing", '"thing"')
+               .replace("feature", '"feature"')
+               .replace("device", '"device"')
+               .replace("values:[{value", '"values":[{"value"')
+               .replace("magnitude", '"magnitude"')
+               .replace("startDate", '"startDate"')
+               .replace("endDate", '"endDate"')
+               .replace("total", '"total"')
+               .replace("limit", '"limit"')
+               .replace("page", '"page"')
+               .replace("pages", '"pages"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"');
+// remove non-printable and other non-valid JSON chars
+s = s.replace(/[\u0000-\u0019]+/g,""); 
+//s="'"+s+"'";
+console.log(s);
+var o = JSON.parse(s);
+            console.log("Mao");
+            console.log(s);
+           // var obj =JSON.parse(data);
+            console.log(o);
+            // Select the "temp" HTML element and update its content using the data.value
+            // (the value) and data.unit (the unit) returned in the JSON payload
+            idprova4=o.docs[0].values[0].value[0];
+            $('#temp42').html(o.docs[0].values[0].value[1]);
+            $('#temp43').html(o.docs[0].values[0].value[2]);
+            $('#temp44').html(o.docs[0].values[0].value[3]);
+            $('#temp45').html(o.docs[0].values[0].value[4]);
+            var xy=o.docs[0].values[0].value[2];
+            var yz=o.docs[0].values[0].value[3];
+            var xz=o.docs[0].values[0].value[4];
+            var magnitude=o.docs[0].values[0].value[1];
+
+            idprova4=idprova4*1000;
+            var d4 = new Date(idprova4);
+            idprova4=d4.toLocaleString();
+            console.log(idprova4);
+            document.getElementById("data4").innerHTML = idprova4;
+            // The doPoll() function sets a timer to call itself again in 1 secods (1000 milliseconds)
+            //setTimeout(doPoll4, 20000);
+            if(yz>180&&xz>180){if(magnitude<4){faccia1++;}
+    else if(magnitude>3&&magnitude<7){faccia1=faccia1+2;}
+    else {faccia1=faccia1+3;}};
+    if(xy>180&&yz>90&&yz<270){if(magnitude<4){faccia2++;}
+    else if(magnitude>3&&magnitude<7){faccia2=faccia2+2;}
+    else {faccia2=faccia2+3;}};
+    if(xy<60&&xz<45){if(magnitude<4){faccia3++;}
+    else if(magnitude>3&&magnitude<7){faccia3=faccia3+2;}
+    else {faccia3=faccia3+3;}};
+    if(yz>30&&yz<90&&xz>45&&xz<90){if(magnitude<4){faccia4++;}
+    else if(magnitude>3&&magnitude<7){faccia4=faccia4+2;}
+    else {faccia4=faccia4+3;}};
+    if(xy>60&&xy<90&&yz<30){if(magnitude<4){faccia5++;}
+    else if(magnitude>3&&magnitude<7){faccia5=faccia5+2;}
+    else {faccia5=faccia5+3;}};
+    if(xy>90&&xy<270&&xz>90&&xz<270){if(magnitude<4){faccia6++;}
+    else if(magnitude>3&&magnitude<7){faccia6=faccia6+2;}
+    else {faccia6=faccia6+3;}};
+        })
+       
+    
+        $(document).ready(function(){
+    //function doPoll5() {
+        // Use the AJAX helper to get the JSON payload from the temperature sensor
+        $.get('http://test.atmosphere.tools/v1/measurements?filter={"thing":"product"}&limit=1&page=5',
+          // When the response arrives, this function is called
+          function (s) {
+            
+            
+            console.log(s);
+            // preserve newlines, etc - use valid JSON
+s = s.replace(/\\n/g, "\\n")  
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f")
+               .replace("docs",'"docs"')
+               .replace("relatedThings", '"relatedThings"')
+               .replace("baseFeatures", '"baseFeatures"')
+               .replace("tags", '"tags"')
+               .replace("deleted", '"deleted"')
+               .replace("false", '"false"')
+               .replace("_id", '"_id"')               
+               .replace("thing", '"thing"')
+               .replace("feature", '"feature"')
+               .replace("device", '"device"')
+               .replace("values:[{value", '"values":[{"value"')
+               .replace("magnitude", '"magnitude"')
+               .replace("startDate", '"startDate"')
+               .replace("endDate", '"endDate"')
+               .replace("total", '"total"')
+               .replace("limit", '"limit"')
+               .replace("page", '"page"')
+               .replace("pages", '"pages"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"')
+               .replace("'",'"');
+// remove non-printable and other non-valid JSON chars
+s = s.replace(/[\u0000-\u0019]+/g,""); 
+//s="'"+s+"'";
+console.log(s);
+var o = JSON.parse(s);
+            console.log("Mao");
+            console.log(s);
+           // var obj =JSON.parse(data);
+            console.log(o);
+            // Select the "temp" HTML element and update its content using the data.value
+            // (the value) and data.unit (the unit) returned in the JSON payload
+            idprova5=o.docs[0].values[0].value[0];
+            $('#temp52').html(o.docs[0].values[0].value[1]);
+            $('#temp53').html(o.docs[0].values[0].value[2]);
+            $('#temp54').html(o.docs[0].values[0].value[3]);
+            $('#temp55').html(o.docs[0].values[0].value[4]);
+            var xy=o.docs[0].values[0].value[2];
+            var yz=o.docs[0].values[0].value[3];
+            var xz=o.docs[0].values[0].value[4];
+            var magnitude=o.docs[0].values[0].value[1];
+
+            idprova5=idprova5*1000;
+            var d5 = new Date(idprova5);
+            idprova5=d5.toLocaleString();
+            console.log(idprova5);
+            document.getElementById("data5").innerHTML = idprova5;
+            // The doPoll() function sets a timer to call itself again in 1 secods (1000 milliseconds)
+           // setTimeout(doPoll5, 20000);
+           if(yz>180&&xz>180){if(magnitude<4){faccia1++;}
+    else if(magnitude>3&&magnitude<7){faccia1=faccia1+2;}
+    else {faccia1=faccia1+3;}};
+    if(xy>180&&yz>90&&yz<270){if(magnitude<4){faccia2++;}
+    else if(magnitude>3&&magnitude<7){faccia2=faccia2+2;}
+    else {faccia2=faccia2+3;}};
+    if(xy<60&&xz<45){if(magnitude<4){faccia3++;}
+    else if(magnitude>3&&magnitude<7){faccia3=faccia3+2;}
+    else {faccia3=faccia3+3;}};
+    if(yz>30&&yz<90&&xz>45&&xz<90){if(magnitude<4){faccia4++;}
+    else if(magnitude>3&&magnitude<7){faccia4=faccia4+2;}
+    else {faccia4=faccia4+3;}};
+    if(xy>60&&xy<90&&yz<30){if(magnitude<4){faccia5++;}
+    else if(magnitude>3&&magnitude<7){faccia5=faccia5+2;}
+    else {faccia5=faccia5+3;}};
+    if(xy>90&&xy<270&&xz>90&&xz<270){if(magnitude<4){faccia6++;}
+    else if(magnitude>3&&magnitude<7){faccia6=faccia6+2;}
+    else {faccia6=faccia6+3;}};
+     console.log("mao"); 
+     console.log(faccia1);
+    console.log(faccia2);
+    console.log(faccia3);
+    console.log(faccia4);
+    console.log(faccia5);
+    console.log(faccia6); 
+    if(faccia1<1){link1="fotoTesi/default.JPG"}else if(faccia1<3){link1="fotoTesi/faccia11.JPG"}else if(faccia1<6){link1="fotoTesi/faccia12.JPG"}else {link1="fotoTesi/faccia13.JPG"};
+    if(faccia2<1){link2="fotoTesi/default.JPG"}else if(faccia2<3){link2="fotoTesi/faccia21.JPG"}else if(faccia2<6){link2="fotoTesi/faccia22.JPG"}else {link2="fotoTesi/faccia23.JPG"};
+    if(faccia3<1){link3="fotoTesi/default.JPG"}else if(faccia3<3){link3="fotoTesi/faccia31.JPG"}else if(faccia3<6){link3="fotoTesi/faccia32.JPG"}else {link3="fotoTesi/faccia33.JPG"};
+    if(faccia4<1){link4="fotoTesi/default.JPG"}else if(faccia4<3){link4="fotoTesi/faccia41.JPG"}else if(faccia4<6){link4="fotoTesi/faccia42.JPG"}else {link4="fotoTesi/faccia43.JPG"};
+    if(faccia5<1){link5="fotoTesi/default.JPG"}else if(faccia5<3){link5="fotoTesi/faccia51.JPG"}else if(faccia5<6){link5="fotoTesi/faccia52.JPG"}else {link5="fotoTesi/faccia53.JPG"};
+    if(faccia6<1){link6="fotoTesi/default.JPG"}else if(faccia6<3){link6="fotoTesi/faccia61.JPG"}else if(faccia6<6){link6="fotoTesi/faccia62.JPG"}else {link6="fotoTesi/faccia63.JPG"};
+    document.getElementById('image_id1').src=link1;
+    document.getElementById('image_id2').src=link2;
+    document.getElementById('image_id3').src=link3;
+    document.getElementById('image_id4').src=link4;
+    document.getElementById('image_id5').src=link5;
+    document.getElementById('image_id6').src=link6;
+     })})
+    
+      
+    
+  
+    
+    
+    </script>
+
+<table width="850" border="3" align="center" height="60">
+
+  <tr>
+       <td width="250"><h2 align="center">Time</h2></td>
+       <td width="150"><h2 align="center">Magnitude</h2></td>
+       <td width="150"><h2 align="center">AngleXY</h2></td>
+       <td width="150"><h2 align="center">AngleYZ</h2></td>
+       <td width="150"><h2 align="center">AngleXZ</h2></td>
+  </tr>
+
+  
+
+</table>
+    <table width="850" border="3" align="center" height="100">
+
+      <tr>
+           <td width="250"><h3 align="center" id='data1'></h3></td>
+           <td width="150"><h3 align="center" id='temp12'></h3></td>
+           <td width="150"><h3 align="center" id='temp13'></h3></td>
+           <td width="150"><h3 align="center" id='temp14'></h3></td>
+           <td width="150"><h3 align="center" id='temp15'></h3></td>
+      </tr>
+
+      <tr>
+           <td width="250"><h3 align="center" id='data2'></h3></td>
+           <td width="150"><h3 align="center" id='temp22'></h3></td>
+           <td width="150"><h3 align="center" id='temp23'></h3></td>
+           <td width="150"><h3 align="center" id='temp24'></h3></td>
+           <td width="150"><h3 align="center" id='temp25'></h3></td>
+      </tr>
+
+      <tr>
+          <td width="250"><h3 align="center" id='data3'></h3></td>
+          <td width="150"><h3 align="center" id='temp32'></h3></td>
+          <td width="150"><h3 align="center" id='temp33'></h3></td>
+          <td width="150"><h3 align="center" id='temp34'></h3></td>
+          <td width="150"><h3 align="center" id='temp35'></h3></td>
+      </tr>
+
+      <tr>
+          <td width="250"><h3 align="center" id='data4'></h3></td>
+          <td width="150"><h3 align="center" id='temp42'></h3></td>
+          <td width="150"><h3 align="center" id='temp43'></h3></td>
+          <td width="150"><h3 align="center" id='temp44'></h3></td>
+          <td width="150"><h3 align="center" id='temp45'></h3></td>
+      </tr>
+
+      <tr>
+          <td width="250"><h3 align="center" id='data5'></h3></td>
+          <td width="150"><h3 align="center" id='temp52'></h3></td>
+          <td width="150"><h3 align="center" id='temp53'></h3></td>
+          <td width="150"><h3 align="center" id='temp54'></h3></td>
+          <td width="150"><h3 align="center" id='temp55'></h3></td>
+      </tr>
+
+
+
+    </table>
+
+
+</table>
+
+<p align="center">Tabella per la posizione degli urti subiti. Grigio = Nessun urto; Verde = Urto debole; Giallo = urto moderato; Rosso = Urto intenso.</p>
+<table width="850" border="2" align="center" height="180">
+<tr>
+  <tr>
+    <td><p align="center">Faccia 1</p></td>
+    <td><p align="center">Faccia 2</p></td>
+    <td><p align="center">Faccia 3</p></td>
+    <td><p align="center">Faccia 4</p></td>
+    <td><p align="center">Faccia 5</p></td>
+    <td><p align="center">Faccia 6</p></td>
+</tr>
+</tr>
+<td><img id="image_id1" src="fotoTesi/default.JPG" height="160" width="160"></td>
+<td><img id="image_id2" src="fotoTesi/default.JPG" height="160" width="160"></td>
+<td><img id="image_id3" src="fotoTesi/default.JPG" height="160" width="160"></td>
+<td><img id="image_id4" src="fotoTesi/default.JPG" height="160" width="160"></td>
+<td><img id="image_id5" src="fotoTesi/default.JPG" height="160" width="160"></td>
+<td><img id="image_id6" src="fotoTesi/default.JPG" height="160" width="160"></td>
+</table>
+  </body>
+</html>
