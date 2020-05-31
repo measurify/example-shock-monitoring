@@ -12,7 +12,7 @@ The main components:
 
 - **Microcontroller** ([Arduino MKR WiFi 1010](https://store.arduino.cc/mkr-wifi-1010))
 - **MicroSD support** ([MKR Mem Shield](https://store.arduino.cc/mkr-mem-shield))
-- **IMU sensor** ([SparkFun 9DoF IMU Breakout - LSM9DS1)](https://www.sparkfun.com/products/13284)
+- **IMU sensor** ([SparkFun 9DoF IMU Breakout - LSM9DS1)](https://www.sparkfun.com/products/13284))
 
 A complete hookup guide with a brief description of the sensor can be found [here](https://learn.sparkfun.com/tutorials/lsm9ds1-breakout-hookup-guide?_ga=2.217884755.452313816.1563890620-213251003.1554896041).
 
@@ -37,28 +37,28 @@ The code has the following behaviour:
 
 	```
 	void firstConnection() {
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
+	  while (!Serial) {
+		; // wait for serial port to connect. Needed for native USB port only
+	  }
 
-  String fv = WiFi.firmwareVersion();
-  if (fv < "1.0.0") {
-    Serial.println("Please upgrade the firmware");
-  }
+	  String fv = WiFi.firmwareVersion();
+	  if (fv < "1.0.0") {
+		Serial.println("Please upgrade the firmware");
+	  }
 
-  // attempt to connect to Wifi network:
-  while (WiFi.status() != 3) {//3==WL_CONNECTED
-    Serial.print("Attempting to connect to SSID: ");
-    Serial.println(ssid);
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
-    status = WiFi.begin(ssid, pass);
+	  // attempt to connect to Wifi network:
+	  while (WiFi.status() != 3) {//3==WL_CONNECTED
+		Serial.print("Attempting to connect to SSID: ");
+		Serial.println(ssid);
+		// Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+		status = WiFi.begin(ssid, pass);
 
-    // wait 10 seconds for connection:
-    delay(5000);
-  }
-  Serial.println("Connected to wifi");
-  printWifiStatus();
-}
+		// wait 10 seconds for connection:
+		delay(5000);
+	  }
+	  Serial.println("Connected to wifi");
+	  printWifiStatus();
+	}
 	```
 - Inizialize IMU's parameters
 
@@ -66,29 +66,29 @@ The code has the following behaviour:
 
 	```
 	String getToken() {
-  login["username"] = "impact-sensor-user-username";
-  login["password"] = "impact-sensor-user-password";
+	  login["username"] = "impact-sensor-user-username";
+	  login["password"] = "impact-sensor-user-password";
 
-  // if you get a connection, report back via serial:
-  if (wifi.connect(serverAddress, port)) {
-    Serial.println("making POST request");
-    postLoginFunction(login);
+	  // if you get a connection, report back via serial:
+	  if (wifi.connect(serverAddress, port)) {
+		Serial.println("making POST request");
+		postLoginFunction(login);
 
-  } else {
-    // if you didn't get a connection to the server:
-    Serial.println("connection failed");
-  }
-  // read the status code and body of the response
-  int statusCode = httpClient.responseStatusCode();
-  String response = httpClient.responseBody();
+	  } else {
+		// if you didn't get a connection to the server:
+		Serial.println("connection failed");
+	  }
+	  // read the status code and body of the response
+	  int statusCode = httpClient.responseStatusCode();
+	  String response = httpClient.responseBody();
 
-  Serial.print("Status code: ");
-  Serial.println(statusCode);
-  Serial.print("Response: ");
-  Serial.println(response);
+	  Serial.print("Status code: ");
+	  Serial.println(statusCode);
+	  Serial.print("Response: ");
+	  Serial.println(response);
 
-  return response;
-}
+	  return response;
+	}
 	```
 	
 ### Loop
