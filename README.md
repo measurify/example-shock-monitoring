@@ -98,89 +98,89 @@ The code has the following behaviour:
 	```
 	void Impact()
 	{
-  /*
-    //Calibration testing. Accelerometer is calibrated correctly x ~0 y ~0 z ~9.8
-    Serial.print("X: "); Serial.print(event.acceleration.x); Serial.print(" ");
-    Serial.print("Y: "); Serial.print(event.acceleration.y); Serial.print(" ");
-    Serial.print("Z: "); Serial.print(event.acceleration.z); Serial.print(" ");Serial.println("m/s^2 ");
-  */
+	  /*
+		//Calibration testing. Accelerometer is calibrated correctly x ~0 y ~0 z ~9.8
+		Serial.print("X: "); Serial.print(event.acceleration.x); Serial.print(" ");
+		Serial.print("Y: "); Serial.print(event.acceleration.y); Serial.print(" ");
+		Serial.print("Z: "); Serial.print(event.acceleration.z); Serial.print(" ");Serial.println("m/s^2 ");
+	  */
 
-  time1 = millis(); // resets time value
+	  time1 = millis(); // resets time value
 
-  float oldx = xaxis; // local variables store previous axis readings for comparison
-  float oldy = yaxis;
-  float oldz = zaxis;
+	  float oldx = xaxis; // local variables store previous axis readings for comparison
+	  float oldy = yaxis;
+	  float oldz = zaxis;
 
-  //Serial.print("current time = "); Serial.print(millis()); Serial.print("\toldx = "); Serial.print(oldx); Serial.print("\toldy = "); Serial.print(oldy); Serial.print("\toldz = "); Serial.println(oldz);
+	  //Serial.print("current time = "); Serial.print(millis()); Serial.print("\toldx = "); Serial.print(oldx); Serial.print("\toldy = "); Serial.print(oldy); Serial.print("\toldz = "); Serial.println(oldz);
 
-  vibration--; // loop counter prevents false triggering. Vibration resets if there is an impact. Don't detect new changes until that "time" has passed.
-  //Serial.print("Vibration = "); Serial.println(vibration);
-  if (vibration < 0) vibration = 0;
-  //Serial.println("Vibration Reset!");
-  //Serial.println("****************************");
+	  vibration--; // loop counter prevents false triggering. Vibration resets if there is an impact. Don't detect new changes until that "time" has passed.
+	  //Serial.print("Vibration = "); Serial.println(vibration);
+	  if (vibration < 0) vibration = 0;
+	  //Serial.println("Vibration Reset!");
+	  //Serial.println("****************************");
 
-  xaxis = imu.calcAccel(imu.ax);
-  yaxis = imu.calcAccel(imu.ay);
-  zaxis = imu.calcAccel(imu.az);
+	  xaxis = imu.calcAccel(imu.ax);
+	  yaxis = imu.calcAccel(imu.ay);
+	  zaxis = imu.calcAccel(imu.az);
 
-  //Serial.print("current time = "); Serial.print(millis()); Serial.print("\txaxis = "); Serial.print(xaxis); Serial.print("\tyaxis = "); Serial.print(yaxis); Serial.print("\tzaxis = "); Serial.println(zaxis);
-  //Serial.println("****************************");
+	  //Serial.print("current time = "); Serial.print(millis()); Serial.print("\txaxis = "); Serial.print(xaxis); Serial.print("\tyaxis = "); Serial.print(yaxis); Serial.print("\tzaxis = "); Serial.println(zaxis);
+	  //Serial.println("****************************");
 
-  if (vibration > 0) return;
+	  if (vibration > 0) return;
 
-  deltx = xaxis - oldx;
-  delty = yaxis - oldy;
-  deltz = zaxis - oldz;
+	  deltx = xaxis - oldx;
+	  delty = yaxis - oldy;
+	  deltz = zaxis - oldz;
 
-  magnitude = sqrt(sq(deltx) + sq(delty) + sq(deltz)); // Magnitude to calculate force of impact. Pythagorean theorem used.
+	  magnitude = sqrt(sq(deltx) + sq(delty) + sq(deltz)); // Magnitude to calculate force of impact. Pythagorean theorem used.
 
-  if (magnitude >= sensitivity) //impact detected
-  {
-    impactTime = secondsStart + seconds();
+	  if (magnitude >= sensitivity) //impact detected
+	  {
+		impactTime = secondsStart + seconds();
 
-    //Values that caused the impact
-    Serial.print("Impact Time = "); Serial.print(impactTime); Serial.print(" ms");
-    Serial.println();
-    Serial.print("oldx = "); Serial.print(oldx); Serial.print("\toldy = "); Serial.print(oldy); Serial.print("\toldz = "); Serial.println(oldz);
-    Serial.print("xaxis = "); Serial.print(xaxis); Serial.print("\tyaxis = "); Serial.print(yaxis); Serial.print("\tzaxis = "); Serial.println(zaxis);
-    Serial.print("Mag = "); Serial.print(magnitude);
-    Serial.print("\t\t(deltx = "); Serial.print(deltx);
-    Serial.print("\tdelty = "); Serial.print(delty);
-    Serial.print("\tdeltz = "); Serial.print(deltz); Serial.println(")");
-
-
-    updateflag = 1;
-
-    //double X = xaxis - 512; // adjust xaxis reading to +/- 512
-    //double Y = yaxis - 512; // adjust yaxis reading to +/- 512
+		//Values that caused the impact
+		Serial.print("Impact Time = "); Serial.print(impactTime); Serial.print(" ms");
+		Serial.println();
+		Serial.print("oldx = "); Serial.print(oldx); Serial.print("\toldy = "); Serial.print(oldy); Serial.print("\toldz = "); Serial.println(oldz);
+		Serial.print("xaxis = "); Serial.print(xaxis); Serial.print("\tyaxis = "); Serial.print(yaxis); Serial.print("\tzaxis = "); Serial.println(zaxis);
+		Serial.print("Mag = "); Serial.print(magnitude);
+		Serial.print("\t\t(deltx = "); Serial.print(deltx);
+		Serial.print("\tdelty = "); Serial.print(delty);
+		Serial.print("\tdeltz = "); Serial.print(deltz); Serial.println(")");
 
 
-    double X = imu.calcAccel(imu.ax);   // used a double value for a better measure
-    double Y = imu.calcAccel(imu.ay);
-    double Z = imu.calcAccel(imu.az);
+		updateflag = 1;
+
+		//double X = xaxis - 512; // adjust xaxis reading to +/- 512
+		//double Y = yaxis - 512; // adjust yaxis reading to +/- 512
 
 
-    Serial.print("X = "); Serial.print(X); Serial.print("\tY = "); Serial.print(Y); Serial.print("\tZ = "); Serial.println(Z);
+		double X = imu.calcAccel(imu.ax);   // used a double value for a better measure
+		double Y = imu.calcAccel(imu.ay);
+		double Z = imu.calcAccel(imu.az);
 
-    Serial.println("****************************");
 
-    angleXY = ((atan2(Y, X) * 180) / PI) + 180; // use atan2 to calculate angle and convert radians to degrees
-    angleXY = range(angleXY);
-    angleYZ = ((atan2(Z, Y) * 180) / PI) + 180; // use atan2 to calculate angle and convert radians to degrees
-    angleYZ = range(angleYZ);
-    angleXZ = ((atan2(Z, X) * 180) / PI) + 180; // use atan2 to calculate angle and convert radians to degrees
-    angleXZ = range(angleXZ);
+		Serial.print("X = "); Serial.print(X); Serial.print("\tY = "); Serial.print(Y); Serial.print("\tZ = "); Serial.println(Z);
 
-    vibration = devibrate;                                      // reset anti-vibration counter
-    time2 = millis();
-  }
-  else
-  {
-    //if (magnitude > 2)
-    //Serial.println(magnitude);
-    magnitude = 0;                                            // reset magnitude of impact to 0
-  }
-}
+		Serial.println("****************************");
+
+		angleXY = ((atan2(Y, X) * 180) / PI) + 180; // use atan2 to calculate angle and convert radians to degrees
+		angleXY = range(angleXY);
+		angleYZ = ((atan2(Z, Y) * 180) / PI) + 180; // use atan2 to calculate angle and convert radians to degrees
+		angleYZ = range(angleYZ);
+		angleXZ = ((atan2(Z, X) * 180) / PI) + 180; // use atan2 to calculate angle and convert radians to degrees
+		angleXZ = range(angleXZ);
+
+		vibration = devibrate;                                      // reset anti-vibration counter
+		time2 = millis();
+	  }
+	  else
+	  {
+		//if (magnitude > 2)
+		//Serial.println(magnitude);
+		magnitude = 0;                                            // reset magnitude of impact to 0
+	  }
+	}
 	```
 	
 - Check for Internet connection
