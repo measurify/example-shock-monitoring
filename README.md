@@ -1,24 +1,24 @@
-#Design and development of an embedded device for impact assessment
+# Design and development of an embedded device for impact assessment
 
-##Overview
+## Overview
 
 This project is intended to detect impacts that an object could suffer during its movement (for example, during a relocation or the shipping of an artwork).
 The software, besides acquire and elaborate the data in order to decide how intese the impact was, send them to an API called [*Measurify*](https://drive.google.com/file/d/10dYphKwHbEJ-b69iEGDVpFh5caEc4vpM/view?usp=sharing) (formally known as *Atmosphere*); if there is no connection available, the record of the impacts aren't lost, but saved locally in a SD card.
 Finally a web interface is created so that the user can view the data in the easiest way possible.
 
-##Hardware
+## Hardware
 
 The main components:
 
 - **Microcontroller** ([Arduino MKR WiFi 1010](https://store.arduino.cc/mkr-wifi-1010))
 - **MicroSD support** ([MKR Mem Shield](https://store.arduino.cc/mkr-mem-shield))
-- **IMU sensor** ([SparkFun 9DoF IMU Breakout - LSM9DS1)](https://www.sparkfun.com/products/13284))
+- **IMU sensor** ([SparkFun 9DoF IMU Breakout - LSM9DS1)](https://www.sparkfun.com/products/13284)
 
 A complete hookup guide with a brief description of the sensor can be found [here](https://learn.sparkfun.com/tutorials/lsm9ds1-breakout-hookup-guide?_ga=2.217884755.452313816.1563890620-213251003.1554896041).
 
 ![The device used during the sperimentation](images/figure1.jpg?raw=true "Figure 1")
 
-##Software
+## Software
 
 During the development of the project, these Arduino's libraries were used:
 
@@ -31,7 +31,7 @@ Finally, the last library is used to retrive the global time from the Internet, 
 
 The code has the following behaviour:
 
-###Setup
+### Setup
 
 - First Internet connection
 
@@ -58,8 +58,8 @@ The code has the following behaviour:
   }
   Serial.println("Connected to wifi");
   printWifiStatus();
-}
-	```
+	}
+
 - Inizialize IMU's parameters
 
 - Token's retrive from the API server
@@ -91,7 +91,7 @@ The code has the following behaviour:
 }
 	```
 
-###Loop
+### Loop
 
 - Impact analysis
 
