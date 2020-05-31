@@ -88,8 +88,7 @@ The code has the following behaviour:
   Serial.println(response);
 
   return response;
-}
-	```
+	}
 
 ### Loop
 
@@ -97,7 +96,7 @@ The code has the following behaviour:
 
 	```
 	void Impact()
-{
+	{
   /*
     //Calibration testing. Accelerometer is calibrated correctly x ~0 y ~0 z ~9.8
     Serial.print("X: "); Serial.print(event.acceleration.x); Serial.print(" ");
@@ -181,7 +180,7 @@ The code has the following behaviour:
     magnitude = 0;                                            // reset magnitude of impact to 0
   }
 }
-	```
+
 	
 - Check for Internet connection
 	- If connected:
