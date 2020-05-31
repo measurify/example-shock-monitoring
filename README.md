@@ -12,7 +12,7 @@ The main components:
 
 - **Microcontroller** ([Arduino MKR WiFi 1010](https://store.arduino.cc/mkr-wifi-1010))
 - **MicroSD support** ([MKR Mem Shield](https://store.arduino.cc/mkr-mem-shield))
-- **IMU sensor** ([SparkFun 9DoF IMU Breakout - LSM9DS1)](https://www.sparkfun.com/products/13284))
+- **IMU sensor** ([SparkFun 9DoF IMU Breakout - LSM9DS1](https://www.sparkfun.com/products/13284))
 
 A complete hookup guide with a brief description of the sensor can be found [here](https://learn.sparkfun.com/tutorials/lsm9ds1-breakout-hookup-guide?_ga=2.217884755.452313816.1563890620-213251003.1554896041).
 
@@ -247,7 +247,7 @@ In order to program the Arduino from its IDE and therefore open the file, you ne
 
 ### Select your board type and port
 
-After downloading the libraries metioned above, select the board type and port: you'll need to select the entry in the **Tools** and then **Board** menu that corresponds to your Arduino board. After that, select the serial device of the board from the **Serial Port** menu. This is likely to be COM3 or higher. To find out, you can disconnect your board and re-open the menu; the entry that disappears should be the Arduino board. Reconnect the board and select that serial port.
+After downloading the libraries metioned above by clicking `Sketch->Libraries->Manage Libraries`, select the board type and port: you'll need to select the entry in the **Tools** and then **Board** menu that corresponds to your Arduino board. After that, select the serial device of the board from the **Serial Port** menu. This is likely to be COM3 or higher. To find out, you can disconnect your board and re-open the menu; the entry that disappears should be the Arduino board. Reconnect the board and select that serial port.
 
 ### Upload the program 
 
