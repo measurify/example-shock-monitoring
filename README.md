@@ -36,7 +36,7 @@ The code has the following behaviour:
 - First Internet connection
 
 	```
-		void firstConnection() {
+	void firstConnection() {
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
@@ -58,8 +58,8 @@ The code has the following behaviour:
   }
   Serial.println("Connected to wifi");
   printWifiStatus();
-	}
-
+}
+	```
 - Inizialize IMU's parameters
 
 - Token's retrive from the API server
@@ -88,8 +88,9 @@ The code has the following behaviour:
   Serial.println(response);
 
   return response;
-	}
-
+}
+	```
+	
 ### Loop
 
 - Impact analysis
@@ -179,8 +180,8 @@ The code has the following behaviour:
     //Serial.println(magnitude);
     magnitude = 0;                                            // reset magnitude of impact to 0
   }
-	}
-
+}
+	```
 	
 - Check for Internet connection
 	- If connected:
@@ -188,10 +189,69 @@ The code has the following behaviour:
 		- Wait for the response from the server
 		- Back to the loop
 		
+		```
+		void postOnlineData(int value) {
+		  String token = getToken();
+		  //ora parte seconda post
+		  measureObject["thing"] = "product";
+		  measureObject["feature"] = "impact";
+		  measureObject["device"] = "impact-sensor";
+		  //if (!arrayComplete)
+		  //{
+		  if (value == 0) {
+			firstCompleteNested();
+		  }
+		  if (value == 1)
+		  {
+			SDCompleteNested();
+		  }
+
+		  //arrayComplete=true;
+		  //}
+		  //else
+		  //{
+		  //  setCompleteNested();
+		  //}
+
+		  postMeasureFunction(measureObject, token);
+
+		  int statusCode2 = httpClient.responseStatusCode();
+		  String response2 = httpClient.responseBody();
+
+		  Serial.print("Status code2: ");
+		  Serial.println(statusCode2);
+		  Serial.print("Response: ");
+		  Serial.println(response2);
+		}
+		```
 	- If not connected:
 		- Save the data in a txt file by adding a line for every measure
-		- Back to the loop and every 5 seconds check for the connection: if connected, read every line in the txt file and send them to the server, then delete the file.
+		- Back to the loop and every 5 seconds check for the connection: if connected, read every line in the txt file and send the measure to the server, then delete the file.
 
+## Web application
+
+As mentioned before, a simple web application was developed: a table with the last five impact is present and the columns in it represent the main features of the impact.
+In addition, the pictures of a sample box at the bottom of the page represent how much damage every side has received in the last five impacts: by doing this, the user can immediately see which side is the most damaged, without reading the angles of the chart.
+
+![webapp](images/figure2.jpg?raw=true "Web application")
+
+## Quick start
+
+After the microcontroller and the sensor have been connected together as the picture below, connect the Arduino to an USB port of your computer.
+
+![Connection](images/figure3.jpg?raw=true "I2C connection is used here")
+
+### Open *thesis.ino*
+
+In order to program the Arduino from its IDE and therefore open the file, you need to install the [Arduino Desktop IDE](https://www.arduino.cc/en/Main/Software) and add the Arduino SAMD Core to it. This simple procedure is done selecting **Tools menu**, then **Boards** and last **Boards Manager**, as documented in the [Arduino Boards Manager](https://www.arduino.cc/en/Guide/Cores) page.
+
+### Select your board type and port
+
+After downloading the libraries metioned above, select the board type and port: you'll need to select the entry in the **Tools** and then **Board** menu that corresponds to your Arduino board. After that, select the serial device of the board from the **Serial Port** menu. This is likely to be COM3 or higher. To find out, you can disconnect your board and re-open the menu; the entry that disappears should be the Arduino board. Reconnect the board and select that serial port.
+
+### Upload the program 
+
+Now, simply click the *Upload* button in the environment. Wait a few seconds - you should see the green progress bar on the right of the status bar. If the upload is successful, the message *Done uploading.* will appear on the left in the status bar.
 
 
 
