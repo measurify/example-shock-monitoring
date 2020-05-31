@@ -16,7 +16,7 @@ The main components:
 
 A complete hookup guide with a brief description of the sensor can be found [here](https://learn.sparkfun.com/tutorials/lsm9ds1-breakout-hookup-guide?_ga=2.217884755.452313816.1563890620-213251003.1554896041).
 
-![The device used during the sperimentation](images/figure1.jpg?raw=true "Figure 1")
+![The device used during the sperimentation](images/figure1.jpg?raw=true "The device used during the sperimentation")
 
 ## Software
 
