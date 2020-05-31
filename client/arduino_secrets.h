@@ -1,2 +1,2 @@
-#define SECRET_SSID "FASTWEB-1-A5D6ED"
-#define SECRET_PASS "365E5F6C06"
+#define SECRET_SSID "NameRouter"
+#define SECRET_PASS "PasswordRouter"
