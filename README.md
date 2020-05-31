@@ -179,7 +179,7 @@ The code has the following behaviour:
     //Serial.println(magnitude);
     magnitude = 0;                                            // reset magnitude of impact to 0
   }
-}
+	}
 
 	
 - Check for Internet connection
