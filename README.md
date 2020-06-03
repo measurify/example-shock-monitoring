@@ -3,7 +3,7 @@
 ## Overview
 
 This project is intended to detect impacts that an object could suffer during its movement (for example, during a relocation or the shipping of an artwork).
-The software, besides acquire and elaborate the data in order to decide how intese the impact was, send them to an API called [*Measurify*](https://drive.google.com/file/d/10dYphKwHbEJ-b69iEGDVpFh5caEc4vpM/view?usp=sharing) (formally known as *Atmosphere*); if there is no connection available, the record of the impacts aren't lost, but saved locally in a SD card.
+The software, besides acquire and elaborate the data in order to decide how intese the impact was, send them to a IoT Framework called [*Measurify*](https://measurify.org/) (previously known as *Atmosphere*); if there is no connection available, the record of the impacts aren't lost, but saved locally in a SD card.
 Finally a web interface is created so that the user can view the data in the easiest way possible.
 
 ## Hardware
